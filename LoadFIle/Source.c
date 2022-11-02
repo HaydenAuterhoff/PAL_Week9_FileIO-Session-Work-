@@ -14,12 +14,26 @@ int main()
 {
 	//How does a file load information into the program (Think about fgets)
 
-	//Validate the file
+	FILE* fp;
 
-	char first_name[MAXLEN];
-	char last_name[MAXLEN];
-	char address[MAXLEN];
+	//Validate the file
+	if ((fp = fopen("Example.txt", "r")) == NULL) {
+
+		printf("Cannot open the file.\n");
+	}
+
+	char tempSchool[MAXLEN];
+	char school[MAXLEN];
+	//char first_name[MAXLEN];
+	//char last_name[MAXLEN];
+	//char address[MAXLEN];
+	char temp[MAXLEN];
 	int age;
+
+	fgets(tempSchool, MAXLEN, fp);
+	tempSchool[strlen(tempSchool) - 1] = '\0';
+	strcpy(school, tempSchool, MAXLEN);
+	printf("%s\n", school);
 
 	//Load First Name
 
@@ -29,11 +43,16 @@ int main()
 
 	//Load Age
 
+	fgets(temp, MAXLEN, fp);
+	age = atoi(temp);		// Using a temp var and 'atoi' to convert it to an int.
+	printf("%d", age);
+
+
 	//Print saved contents
-	printf("First Name: %s \n", first_name);
-	printf("Last Name: %s \n", last_name);
-	printf("Address: %s \n", address);
-	printf("Age: %d \n", age);
+	//printf("First Name: %s \n", first_name);
+	//printf("Last Name: %s \n", last_name);
+	//printf("Address: %s \n", address);
+	//printf("Age: %d \n", age);
 
 	return 0;
 }
