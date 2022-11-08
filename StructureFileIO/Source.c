@@ -28,7 +28,7 @@ typedef struct somename
 
 typedef struct somename1
 {
-	
+
 	DATABUCKET data;
 
 }DATAARRAY;
@@ -37,6 +37,10 @@ typedef struct somename1
 
 
 void getData(DATAARRAY dataArray[]);
+
+void arrayStatus(DATAARRAY dataArray[]);
+
+void saveData(DATAARRAY dataArray[]);
 
 int main()
 {
@@ -51,10 +55,26 @@ int main()
 
 	getData(dataArray);
 
-	//User input for Data Entry
-	
+	// Check status of array
 
-	
+	arrayStatus(dataArray);
+
+	//User input for Data Entry
+
+	puts("Enter your first name: ");
+	fgets(data.firstName, sizeof(data.firstName), stdin);
+	puts("Enter your last name: ");
+	fgets(data.lastName, sizeof(data.lastName), stdin);
+	puts("Enter your address: ");
+	fgets(data.address, sizeof(data.address), stdin);
+	puts("Enter your age: ");
+	scanf_s("%d", &data.age);
+
+
+	saveData(dataArray);
+
+	puts("You have been doxxed.");
+
 
 	//Function call to enter data entry in an unfilled array
 
@@ -69,7 +89,7 @@ void getData(DATAARRAY dataArray[]) {
 
 	FILE* fp;
 
-	if (fp = fopen("Database.txt", "r") == NULL) {
+	if ((fp = fopen("Database.txt", "r")) == NULL) {
 
 		puts("File does not exist or could not open.");
 
@@ -100,7 +120,51 @@ void getData(DATAARRAY dataArray[]) {
 
 	fclose(fp);
 }
+
+// Clean array and see if it has been used:
+
+void arrayStatus(DATAARRAY dataArray[]) {
+
+
+
+
+
+
+}
+
+
 //SaveData Function
+
+void saveData(DATAARRAY dataArray[]) {
+
+	FILE* fp;
+
+	if ((fp = fopen("Database.txt", "w")) == NULL) {
+
+		puts("File does not exist or could not open.");
+
+	}
+
+
+	for (int i = 0; i < NUMENTRY; i++) {
+
+
+		fputs(dataArray[i].data.firstName, fp);
+
+		fputs(dataArray[i].data.lastName, fp);
+
+
+		fputs(dataArray[i].data.address, fp);
+
+		fputs(dataArray[i].data.age, fp);
+
+	}
+
+	fclose(fp);
+
+}
+
+
 
 //PrintArray Function
 
